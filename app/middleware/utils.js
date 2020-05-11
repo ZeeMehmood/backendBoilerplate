@@ -14,6 +14,92 @@ const passport = require('passport');
 const awsSDK = require('aws-sdk');
 const { ErrorCodes } = require('../enums');
 const nodemailer = require('nodemailer');
+const _ = require('lodash');
+const Joi = require('@hapi/joi');
+Joi.objectId = require('joi-objectid')(Joi)
+
+
+
+
+const joiValidation = (data, schema, method) => {
+  try {
+    const { error, value } = schema.validate(data, { abortEarly: false });
+    if (!_.isNil(error)) {
+      let errors = error.details.map(item => {
+        return {
+          [item.path[0]]: {
+            message: item.message.replace(/\"/g, '')
+            // message: item.message.replace(/\/\"/g, '')
+          }
+        };
+      })
+      let resp = {
+        meta: {
+          code: 2,
+          message: error.details[0].message,
+          errors
+        }
+      }
+
+      return { ...resp };
+      // return { error: error, message: error.details[0].message };
+      // return res.Status(400).send({ message: error.details[0].message });
+    }
+    return { value };
+  } catch (error) {
+    return { 
+      meta: {
+        code: 2,
+        message: 'please try again',
+        errors: error
+      }
+    // return res.Status(500).send({ message: error });
+  }
+  }
+}
+
+exports.joiValidation = (data, schema, method) => {
+  // joiValidation(data, schema, method)
+  try {
+    const { error, value } = schema.validate(data, { abortEarly: false });
+    // const { error, value } = Joi.validate(data, schema, { abortEarly: false });
+    if (!_.isNil(error)) {
+
+      let errors = error.details.map(item => {
+        return {
+          [item.path[0]]: {
+            message: item.message.replace(/\"/g, '')
+            // message: item.message.replace(/\/\"/g, '')
+          }
+        };
+      })
+      let resp = {
+        meta: {
+          code: 2,
+          message: error.details[0].message,
+          errors
+        }
+      }
+
+      return { ...resp };
+      // return { error: error, message: error.details[0].message };
+      // return res.Status(400).send({ message: error.details[0].message });
+    }
+    return { value };
+  } catch (error) {
+    return { 
+      meta: {
+        code: 2,
+        message: 'please try again',
+        errors: error
+      }
+    // return res.Status(500).send({ message: error });
+  }
+  }
+}
+
+
+
 /**
  * check is date is valid or not
  * @param {string} value - date string

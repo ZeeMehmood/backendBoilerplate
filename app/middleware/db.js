@@ -548,5 +548,39 @@ module.exports = {
         }
       );
     });
-  }
+  },
+
+
+  /** Get multiple records
+     * @description Get multiple records from a collection based on given condition with projected attributes
+     * @param  {object} model - schema reference 
+     * @param  {object} cond - query condition
+     * @param  {object} proj - information of fields to be projected in query result
+     * @param  {number} limit - number of records to limit in query
+     * @param  {number} skip - number of records to skip
+     * @param  {object} sort - sort order parameters info object
+     */
+    async get(model, cond, proj = {}, limit = 0, skip = 0, sort = {}) {
+
+      return new Promise((resolve, reject) => {
+        model.find(
+          cond,
+          proj,
+          {
+            sort
+          },
+          (err, items) => {
+            if (err) {
+              reject(buildErrObject({ ...ErrorCodes.INTERNAL_SERVER_ERROR, info: err.message }));
+            }
+            resolve(items);
+          }
+        );
+      });
+  },
+
+
+
+
+
 };
