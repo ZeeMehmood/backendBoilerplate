@@ -13,7 +13,12 @@ const createItem = (req, res, next) => {
 
       label: Joi.string().required(),
       slug: Joi.string().required(),
-      parent_id : Joi.objectId().optional()
+      child: Joi.array().items(
+        Joi.object({
+          label: Joi.string().required(),
+          slug: Joi.string().required(),
+        }),
+      ).optional(),
   
   };
 
