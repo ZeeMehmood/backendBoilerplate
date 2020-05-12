@@ -57,7 +57,7 @@ app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.use(require('./app/routes'));
+require('./app/routes/index')(app);
 
 // Multicore enabled by env variable
 let server;

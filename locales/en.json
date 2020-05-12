@@ -1,4 +1,17 @@
 {
+	"MENU": {
+		"LIST_SUCCESS": "Menu listed Successfully",
+		"LIST_ERROR": "Unable to retrieve the product list.",
+		"ALREADY_EXISTS": "The product with this title already exists.",
+		"UPDATE_SUCCESS": "Menu updated Successfully",
+		"UPDATE_ERROR": "Unable to update the product.",
+		"CREATE_SUCCESS": "Menu added Successfully",
+		"CREATE_ERROR": "Unable to add the product.",
+		"DELETE_SUCCESS": "Menu deleted Successfully",
+		"DELETE_ERROR": "Unable to delete the product.",
+		"GET_SINGLE_SUCCESS": "Document found Successfully",
+		"GET_SINGLE_ERROR": "Unable to find the document."
+	},
 	
 	"USER":  {
 		"LOGIN_SUCCESS": "Login Successfully.",
