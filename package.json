@@ -68,7 +68,7 @@
     "trim-request": "^1.0.6",
     "twilio": "^3.33.2",
     "uuid": "^3.3.2",
-    "validator": "^11.1.0",
+    "validator": "^13.7.0",
     "winston": "^3.2.1",
     "zipcodes": "^8.0.0"
   },
